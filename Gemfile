@@ -22,8 +22,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use RSpotify
+# Use Spotify API wrapper
 gem 'rspotify'
+
+# Authenticate users
+gem 'omniauth'
 gem 'omniauth-spotify'
 
 # Ignore .env file
