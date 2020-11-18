@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
-    def home
+    skip_before_action :verify_user
+
+    def index
     end
 end
