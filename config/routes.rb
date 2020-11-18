@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root 'welcome#home'
+  root 'welcome#index'
   
   # MUST REMOVE UNUSED VIEWS
   resources :users do
@@ -9,6 +9,6 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'  
+  post '/logout', to: 'sessions#destroy'  
 
 end
