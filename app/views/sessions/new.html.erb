@@ -1,0 +1,7 @@
+<%= form_for @user, url: login_path, method: :post do |f| %>
+    <%= f.text_field :username, placeholder: "Username" %><br>
+    <%= f.password_field :password, placeholder: "Password" %><br>
+    <%= f.submit "Log In" %>
+<% end %>
+
+Or <%= link_to 'Sign Up', new_user_path %>
