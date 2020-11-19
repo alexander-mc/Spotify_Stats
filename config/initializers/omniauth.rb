@@ -12,3 +12,7 @@ scope = "user-read-recently-played
 Rails.application.config.middleware.use OmniAuth::Builder do
     provider :spotify, ENV['SPOTIFY_ID'], ENV['SPOTIFY_SECRET'], scope: scope
 end
+
+OmniAuth.config.on_failure = Proc.new { |env|
+    OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+}

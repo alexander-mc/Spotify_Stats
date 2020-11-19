@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   get '/auth/spotify', as: 'authentication'
   get '/auth/spotify/callback', to: 'authentication#callback'
+  # get '/auth/failure', to: 'authentication#failure'
+  # post '/authorize/cancel', to: 'authentication#failure'
   get '/auth/failure', to: 'authentication#failure'
+
 
 end
