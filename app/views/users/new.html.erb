@@ -10,13 +10,14 @@
     </section>
     
     <section class="registration-form">
-    <%= form_for @user do |f| %>
-        <%= f.text_field :username, placeholder: "Username" %><br>
-        <%= f.password_field :password, placeholder: "Password" %><br>
-        <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %><br>
-        <%= f.submit 'Sign Up' %>
-    <% end %>
+        <%= form_for @user do |f| %>
+            <%= f.text_field :username, placeholder: "Username" %><br>
+            <%= f.password_field :password, placeholder: "Password" %><br>
+            <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %><br>
+            <%= f.submit 'Sign Up' %>
+        <% end %>
 
-    OR <%= link_to 'Log In', login_path %>
+        OR <%= link_to 'Log In', login_path %><br>
+        <%= link_to 'Log in with Spotify', authentication_path %>
     </section>
 </main>
