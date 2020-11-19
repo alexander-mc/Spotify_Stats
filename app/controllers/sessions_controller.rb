@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
+    before_action :redirect_if_logged_in, only: [:new]
 
     def new
-        redirect_to user_reports_path(current_user) if current_user
         @user = User.new
     end
 
