@@ -1,5 +1,4 @@
 class AuthenticationController < ApplicationController
-    skip_before_action :authenticate_user
 
     def callback
         auth_hash = request.env['omniauth.auth']
@@ -9,12 +8,14 @@ class AuthenticationController < ApplicationController
 
         user.spotify_username = auth_hash[:info][:display_name]
         user.email = auth_hash[:info][:email]
-        
         user.save(validate: false)
+        
+        session[:user_id] = user.id
         redirect_to user_reports_path(user)
     end
 
     def failure
+        User.undo_signup
         redirect_to root_path
     end
 
