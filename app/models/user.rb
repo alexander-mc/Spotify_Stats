@@ -23,4 +23,9 @@ class User < ApplicationRecord
     scope :find_by_ci_username, -> (username) { where('lower("username") = ?', username.downcase).first }
     #scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
 
+    def self.undo_signup
+        user = User.all.last
+        user.destroy if user.spotify_id.blank?
+    end
+
 end
