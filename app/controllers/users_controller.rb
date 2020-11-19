@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :verify_user, only: [:new, :create]
+    skip_before_action :authenticate_user, only: [:new, :create]
 
     def new
         redirect_to user_reports_path(current_user) if current_user
@@ -7,13 +7,14 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.create(user_params)
+        user = User.create(user_params)
 
-        if @user.valid?
-            session[:user_id] = @user.id
-            redirect_to user_reports_path(@user)
+        if user.valid?
+            session[:user_id] = user.id
+            redirect_to user_reports_path(user)
         else
-            flash[:signup_error] = @user.errors.full_messages
+            flash[:signup_error] = user.errors.full_messages
+            @user = user
             render :new
         end
     end

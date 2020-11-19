@@ -1,4 +1,4 @@
-user = User.create(name: "Spotifier", password: "Secret")
+user = User.create(username: "Spotifier", password: "Secret")
 report = user.reports.create(name: "Nov 2019 - Nov 2020")
 
 artist = Artist.create(name: "Amazing Singer")

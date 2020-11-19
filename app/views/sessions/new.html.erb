@@ -1,3 +1,7 @@
+<section id="login-msg-box" class="msg-box">
+    <%= flash[:login_error] if flash[:login_error]%>
+</section>
+
 <%= form_for @user, url: login_path, method: :post do |f| %>
     <%= f.text_field :username, placeholder: "Username" %><br>
     <%= f.password_field :password, placeholder: "Password" %><br>

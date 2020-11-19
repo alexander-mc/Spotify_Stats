@@ -1,13 +1,11 @@
 <main>   
-    <section id="signup-msg-box">
+    <section id="signup-msg-box" class="msg-box">
         <% if flash[:signup_error] %>
-            <div class="msg-box">
-                <ul>
-                <% flash[:signup_error].each do |error| %>
-                    <li><%= error %>
-                <% end %>
-                </ul>
-            </div>
+            <ul>
+            <% flash[:signup_error].each do |error| %>
+                <li><%= error %>
+            <% end %>
+            </ul>
         <% end %>
     </section>
     

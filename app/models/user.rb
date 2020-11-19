@@ -20,7 +20,7 @@ class User < ApplicationRecord
               format: { without: /\s/, message: "cannot include spaces"},
               confirmation: { message: "does not match password" }
 
-    scope :find_by_ci_username, -> (username) { where('lower("name") = ?', username.downcase).first }
+    scope :find_by_ci_username, -> (username) { where('lower("username") = ?', username.downcase).first }
     #scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
 
 end

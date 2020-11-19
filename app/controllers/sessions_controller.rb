@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :verify_user, only: [:new, :create]
+    skip_before_action :authenticate_user, only: [:new, :create]
 
     def new
         redirect_to user_reports_path(current_user) if current_user
@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
             # Render would be more appropriate for the signup page, not the login page, since the user instance variable cannot be nil.
             # This is because signing up does not require searching through the database for a matching record.
         end
+
     end
 
     def destroy

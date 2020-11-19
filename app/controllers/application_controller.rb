@@ -1,9 +1,9 @@
  class ApplicationController < ActionController::Base
-    before_action :verify_user
+    before_action :authenticate_user
 
     private
 
-    def verify_user
+    def authenticate_user
         redirect_to root_path unless current_user
     end
     

@@ -1,3 +1,5 @@
+# RSpotify::authenticate(ENV['SPOTIFY_ID'], ENV['SPOTIFY_SECRET'])
+
 require_relative 'boot'
 
 require 'rails/all'
