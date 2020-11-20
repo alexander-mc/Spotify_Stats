@@ -6,7 +6,7 @@ class Report < ApplicationRecord
     has_many :genres, through: :songs
     has_many :albums, through: :songs
 
-    validates :name, presence: { message: "was not entered" }
+    validates :report_name, presence: { message: "was not entered" }
     validates :file_path, presence: { message: "was not entered" }
-    
+
 end
