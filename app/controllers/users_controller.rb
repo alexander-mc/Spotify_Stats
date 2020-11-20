@@ -6,13 +6,12 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.create(user_params)
+        @user = User.create(user_params)
 
-        if user.valid?
+        if @user.valid?
             redirect_to authentication_path
         else
-            flash[:signup_error] = user.errors.full_messages
-            @user = user
+            flash[:signup_errors] = @user.errors.full_messages
             render :new
         end
     end
