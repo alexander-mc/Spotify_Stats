@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root 'welcome#index'
   
   # MUST REMOVE UNUSED VIEWS
-  resources :users do
-    resources :reports
+  resources :users, only: [:new, :create] do
+    resources :reports # , only: [:index, :show, :new]
   end
+
+  #resources :reports
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
