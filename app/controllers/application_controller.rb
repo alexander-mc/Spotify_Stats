@@ -3,12 +3,12 @@
     
     private
 
-    def authenticate_user
-        redirect_to root_path unless current_user
-    end
-    
     def current_user
         User.find_by(id: session[:user_id])
+    end
+    
+    def redirect_if_logged_out
+        redirect_to root_path unless current_user   
     end
 
     def redirect_if_logged_in
