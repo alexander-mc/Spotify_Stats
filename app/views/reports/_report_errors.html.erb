@@ -1,0 +1,9 @@
+<section id="report-msg-box" class="msg-box">
+    <% if flash[:report_errors] %>
+        <ul>
+        <% flash[:report_errors].each do |error| %>
+            <li><%= error %>
+        <% end %>
+        </ul>
+    <% end %>
+</section>

@@ -1,0 +1,9 @@
+<h2>Edit your Spotify listening history</h2>
+
+<%= render 'report_errors' %>
+
+<%= form_for @report, url: user_report_path(current_user), method: 'put' do |f| %>
+    <%= render partial: 'form', locals: {f: f} %>
+<% end %>
+
+<%= link_to 'Cancel', user_reports_path(current_user) %>

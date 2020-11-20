@@ -2,6 +2,18 @@
   <input type=submit value='Log Out'>
 <% end %>
 
+<section id="index-msg-box" class="msg-box">
+    <%= flash[:page_error] if flash[:page_error]%>
+</section>
+
 <br><br>
 
-<%= link_to 'Add Report', new_user_report_path %>
+<% @reports.each do |report| %>
+    <%= link_to report.report_name, user_report_path(current_user, report) %>
+    <%= link_to 'Edit', edit_user_report_path(current_user, report) %>
+    <%= button_to "Delete", user_report_path(current_user, report), method: :delete, data: { confirm: "Are you sure you want to delete this report?" } %>
+    <br>
+
+<% end %>
+
+<%= link_to 'Add Report', new_user_report_path(current_user) %>

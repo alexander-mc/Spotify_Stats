@@ -1,8 +1,8 @@
 <main>   
     <section id="signup-msg-box" class="msg-box">
-        <% if flash[:signup_error] %>
+        <% if flash[:signup_errors] %>
             <ul>
-            <% flash[:signup_error].each do |error| %>
+            <% flash[:signup_errors].each do |error| %>
                 <li><%= error %>
             <% end %>
             </ul>
