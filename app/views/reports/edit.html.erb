@@ -3,7 +3,15 @@
 <%= render 'report_errors' %>
 
 <%= form_for @report, url: user_report_path(current_user), method: 'put' do |f| %>
+   
     <%= render partial: 'form', locals: {f: f} %>
+
+    <%= content_tag :p, "Existing file: #{@original_report_name || @report.attachment.identifier}" %>
+    <%= content_tag :p, "Change file" %>
+
+    <%= f.file_field :attachment %><br><br>
+    <%= f.hidden_field :attachment_cache %>
+    <%= f.submit %>
 <% end %>
 
 <%= link_to 'Cancel', user_reports_path(current_user) %>

@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
         user = User.find_by_ci_username(params[:user][:username])
 
         if user.try(:authenticate, params[:user][:password])
+            session[:user_id] = user.id
             redirect_to authentication_path
         else
             flash[:login_error] = "Sorry, we could not find that username and/or password. Please try again."

@@ -3,7 +3,12 @@
 <%= render 'report_errors' %>
 
 <%= form_for @report, url: user_reports_path(current_user) do |f| %>
+
     <%= render partial: 'form', locals: { f: f } %>
+
+    <%= f.file_field :attachment %><br><br>
+    <%#= f.hidden_field :attachment_cache %>
+    <%= f.submit %>
 <% end %>
 
 <%= link_to 'Cancel', user_reports_path(current_user) %>

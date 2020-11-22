@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
-    before_action :redirect_if_logged_out
-    before_action :validate_user_id
+    before_action :redirect_if_logged_out, :validate_user_id
     before_action :validate_report_id, only: [:edit, :show]
+    after_action :remove_cached_folder, only: [:create, :update]
 
     def new
         @report = Report.new(user_id: current_user.id)
@@ -11,6 +11,7 @@ class ReportsController < ApplicationController
         @report = Report.create(report_params)
 
         if @report.valid?
+            @report.load_songs
             redirect_to user_report_path(current_user, @report)
         else
             flash[:report_errors] = @report.errors.full_messages
@@ -23,6 +24,9 @@ class ReportsController < ApplicationController
     end
 
     def show
+
+
+
     end
 
     def edit
@@ -36,6 +40,7 @@ class ReportsController < ApplicationController
             redirect_to user_reports_path(current_user)
         else
             flash[:report_errors] = @report.errors.full_messages
+            @original_report_name = Report.find(params[:id]).attachment.identifier
             render :edit
         end
     end
@@ -48,7 +53,7 @@ class ReportsController < ApplicationController
     private
 
     def report_params
-        params.require(:report).permit(:report_name, :file_path, :user_id)
+        params.require(:report).permit(:report_name, :attachment, :attachment_cache, :user_id)
     end
 
     def validate_user_id
@@ -66,6 +71,14 @@ class ReportsController < ApplicationController
         if report.blank?
             flash[:page_error] = "That report does not exist."
             redirect_to user_reports_path(current_user)
+        end
+    end
+
+    def remove_cached_folder
+        if @report.attachment.file
+            folder_name = @report.attachment.file.file.split("/")[-2]
+            path = Rails.root.to_s + "/public/uploads/tmp/" + folder_name
+            FileUtils.rm_rf(path)
         end
     end
 

@@ -7,8 +7,11 @@ class UsersController < ApplicationController
 
     def create
         @user = User.create(user_params)
-
         if @user.valid?
+            session[:user_id] = @user.id
+
+            binding.pry
+
             redirect_to authentication_path
         else
             flash[:signup_errors] = @user.errors.full_messages

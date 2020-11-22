@@ -29,6 +29,9 @@ gem 'rspotify'
 gem 'omniauth'
 gem 'omniauth-spotify'
 
+# Upload files
+gem 'carrierwave'
+
 # Ignore .env file
 gem 'dotenv-rails'
 

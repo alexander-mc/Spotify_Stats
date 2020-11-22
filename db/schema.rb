@@ -31,11 +31,11 @@ ActiveRecord::Schema.define(version: 2020_11_19_092120) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string "name"
+    t.string "report_name"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "file_path"
+    t.string "attachment"
   end
 
   create_table "song_artists", force: :cascade do |t|
@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_092120) do
     t.string "username"
     t.string "password_digest"
     t.string "spotify_username"
-    t.string "spotify_id"
-    t.string "email"
+    t.string "spotify_uid"
+    t.string "spotify_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

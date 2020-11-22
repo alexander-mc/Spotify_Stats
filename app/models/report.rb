@@ -7,6 +7,18 @@ class Report < ApplicationRecord
     has_many :albums, through: :songs
 
     validates :report_name, presence: { message: "was not entered" }
-    validates :file_path, presence: { message: "was not entered" }
+
+    mount_uploader :attachment, AttachmentUploader
+    validates :attachment, presence: { message: "was not entered" }, unless: :attachment_errors_exist?
+
+    def attachment_errors_exist?
+        errors[:attachment].present?
+    end
+
+    def load_songs
+        file = File.read(attachment.file.file)
+        data_hash = JSON.parse(file)
+        binding.pry
+    end
 
 end
