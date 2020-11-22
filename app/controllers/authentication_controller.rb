@@ -1,7 +1,6 @@
 class AuthenticationController < ApplicationController
 
     def callback
-        binding.pry
         
         # Store callback credentials
         session[:credentials] = request.env['omniauth.auth']
@@ -28,12 +27,15 @@ class AuthenticationController < ApplicationController
 
         #     session[:user_id] = current_user.id
         # end
-        binding.pry
+
         if result.is_a? String
-            flash[:page_error] = result
+            session.delete(:user_id)
+            flash[:signup_errors] = Array(result)
+            redirect_to new_user_path
+        else
+            redirect_to user_reports_path(session[:user_id])
         end
 
-        redirect_to user_reports_path(session[:user_id])
     end
 
     def failure

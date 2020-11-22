@@ -36,9 +36,9 @@ class User < ApplicationRecord
         if signing_in?(logged_in_user) && already_existing_user.present?
 
             if already_existing_user.has_spotify_user_data?
-                session[:user_id] = already_existing_user.id
+                #session[:user_id] = already_existing_user.id
                 logged_in_user.destroy
-                return "You already have an account linked to Spotify! To make it easy on you, we've logged you into your existing account. :)"
+                return "This Spotify account is already linked to a user. Please try logging in with the App or through Spotify."
 
             else
                 already_existing_user.update(username: logged_in_user.username, password_digest: logged_in_user.password_digest)
