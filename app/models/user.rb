@@ -29,17 +29,16 @@ class User < ApplicationRecord
 
         logged_in_user = User.find_by(id: session[:user_id])
         already_existing_user = User.find_by(spotify_uid: auth_hash[:uid])
-    
-        #signing_in = logged_in_user.spotify_uid.blank? if logged_in_user
-        #user_already_exists = !!already_existing_user
 
+        # Sign up users
         if signing_in?(logged_in_user) && already_existing_user.present?
 
+            # Reconcile sign ups with existing accounts (due to prior log in through Spotify)
             if already_existing_user.has_spotify_user_data?
-                #session[:user_id] = already_existing_user.id
                 logged_in_user.destroy
                 return "This Spotify account is already linked to a user. Please try logging in with the App or through Spotify."
 
+            # Sign ups without an existing account
             else
                 already_existing_user.update(username: logged_in_user.username, password_digest: logged_in_user.password_digest)
                 already_existing_user.save(validate: false)
@@ -47,6 +46,7 @@ class User < ApplicationRecord
                 logged_in_user.destroy
             end
 
+        # Log in users (through App or Spotify)
         else
             current_user = User.find_or_create_by(spotify_uid: auth_hash[:uid])
             current_user.spotify_username = auth_hash[:info][:display_name]

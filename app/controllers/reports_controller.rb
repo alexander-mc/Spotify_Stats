@@ -11,7 +11,10 @@ class ReportsController < ApplicationController
         @report = Report.create(report_params)
 
         if @report.valid?
-            @report.load_songs
+
+            ### TO DO ###
+            
+            @report.load_songs(session)
             redirect_to user_report_path(current_user, @report)
         else
             flash[:report_errors] = @report.errors.full_messages
@@ -24,8 +27,8 @@ class ReportsController < ApplicationController
     end
 
     def show
-
-
+        
+        ### TO DO ###
 
     end
 
