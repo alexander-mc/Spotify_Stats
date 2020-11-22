@@ -23,9 +23,47 @@ class User < ApplicationRecord
     scope :find_by_ci_username, -> (username) { where('lower("username") = ?', username.downcase).first }
     #scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
 
-    # def self.undo_signup
-    #     binding.pry
-    #     current_user.destroy if current_user.spotify_uid.blank?
-    # end
+    def self.create_or_update_with_Spotify_user_data(session)
+    
+        auth_hash = session[:credentials]
+
+        logged_in_user = User.find_by(id: session[:user_id])
+        already_existing_user = User.find_by(spotify_uid: auth_hash[:uid])
+    
+        #signing_in = logged_in_user.spotify_uid.blank? if logged_in_user
+        #user_already_exists = !!already_existing_user
+
+        if signing_in?(logged_in_user) && already_existing_user.present?
+
+            if already_existing_user.has_spotify_user_data?
+                session[:user_id] = already_existing_user.id
+                logged_in_user.destroy
+                return "You already have an account linked to Spotify! To make it easy on you, we've logged you into your existing account. :)"
+
+            else
+                already_existing_user.update(username: logged_in_user.username, password_digest: logged_in_user.password_digest)
+                already_existing_user.save(validate: false)
+                session[:user_id] = already_existing_user.id
+                logged_in_user.destroy
+            end
+
+        else
+            current_user = User.find_or_create_by(spotify_uid: auth_hash[:uid])
+            current_user.spotify_username = auth_hash[:info][:display_name]
+            current_user.spotify_email = auth_hash[:info][:email]
+            current_user.save(validate: false)
+
+            session[:user_id] = current_user.id
+        end
+
+    end
+
+    def self.signing_in?(user)
+        user.spotify_uid.blank? if user.present?
+    end
+
+    def has_spotify_user_data?
+        spotify_uid.present?
+    end
 
 end
