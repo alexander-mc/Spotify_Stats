@@ -23,7 +23,7 @@ class User < ApplicationRecord
     scope :find_by_ci_username, -> (username) { where('lower("username") = ?', username.downcase).first }
     #scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
 
-    def self.create_or_update_with_Spotify_user_data(session)
+    def self.update_or_create_Spotify_user_data(session)
     
         auth_hash = session[:credentials]
 
@@ -36,7 +36,7 @@ class User < ApplicationRecord
             # Reconcile sign ups with existing accounts (due to prior log in through Spotify)
             if already_existing_user.has_spotify_user_data?
                 logged_in_user.destroy
-                return "This Spotify account is already linked to a user. Please try logging in with the App or through Spotify."
+                return "Existing linked account"
 
             # Sign ups without an existing account
             else

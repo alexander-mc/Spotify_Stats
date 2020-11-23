@@ -5,13 +5,13 @@ class AuthenticationController < ApplicationController
         # Store callback credentials
         session[:credentials] = request.env['omniauth.auth']
         
-        # Update user info
-        result = User.create_or_update_with_Spotify_user_data(session)
+        # Update user data
+        result = User.update_or_create_Spotify_user_data(session)
 
         # Raise error for sign ups with existing account linked to Spotify
-        if result.is_a? String
+        if result == "Existing linked account"
             session.delete(:user_id)
-            flash[:signup_errors] = Array(result)
+            flash[:signup_errors] = Array("This Spotify account is already linked to a user. Please try logging in with the App or through Spotify.")
             redirect_to new_user_path
 
         else

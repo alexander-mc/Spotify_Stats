@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 
         if user.try(:authenticate, params[:user][:password])
             session[:user_id] = user.id
+            binding.pry
             redirect_to authentication_path
         else
             flash[:login_error] = "Sorry, we could not find that username and/or password. Please try again."

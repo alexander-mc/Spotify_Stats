@@ -13,8 +13,7 @@ class ReportsController < ApplicationController
         if @report.valid?
 
             ### TO DO ###
-            
-            @report.load_songs(session)
+            @report.load_streaming_history(session)
             redirect_to user_report_path(current_user, @report)
         else
             flash[:report_errors] = @report.errors.full_messages

@@ -15,11 +15,11 @@ class Report < ApplicationRecord
         errors[:attachment].present?
     end
 
-    def load_songs(session)
+    def load_streaming_history(session)
         file = File.read(attachment.file.file)
-        data_hash = JSON.parse(file)
-
+        streaming_history = JSON.parse(file)
         ## TO DO
+        binding.pry
         user = RSpotify::User.new(session[:credentials])
         binding.pry
     end
