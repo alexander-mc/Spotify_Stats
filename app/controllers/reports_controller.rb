@@ -11,8 +11,6 @@ class ReportsController < ApplicationController
         @report = Report.create(report_params)
 
         if @report.valid?
-
-            ### TO DO ###
             @report.load_streaming_history(session)
             redirect_to user_report_path(current_user, @report)
         else
@@ -27,7 +25,40 @@ class ReportsController < ApplicationController
 
     def show
         
+        binding.pry
         ### TO DO ###
+        # report = Report.find_by(id: params[:id])
+
+        # @start_date = report.song_reports.start_date
+        # @end_date = report.song_reports.end_date
+
+        # SONGS
+        # @total_num_songs = report.songs.count
+        # @top_songs = report.songs.order_by_count
+        # @top_songs = report.songs.order_by_ms_played
+        # @top_songs = report.songs.group('title').limit(10).order('count(title) DESC').pluck('title, sum(ms_played), count(title)')
+        # @top_songs = report.songs.group('title').limit(10).order('sum(ms_played) DESC').pluck('title, sum(ms_played), count(title)')
+
+        # ARTISTS
+        # @total_num_artists = report.artists.count
+        # @top_artists = report.artists.order_by_count
+        # @top_artists = report.artists.order_by_ms_played   
+        # @top_artists = report.artists.group('name').limit(10).order('count(name) DESC').pluck('name, sum(ms_played), count(name)')
+        # OR @top_artists = report.artists.group('name').limit(10).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)')
+
+        # ALBUMS
+        # @total_num_albums = report.albums.count
+        # @top_albums = report.albums.order_by_count
+        # @top_albums = report.albums.order_by_ms_played  
+        # @top_albums = report.albums.group('albums.title').limit(10).order('count(albums.title) DESC').pluck('albums.title, sum(ms_played), count(albums.title)')
+        # OR @top_albums = report.albums.group('albums.title').limit(10).order('sum(ms_played) DESC').pluck('albums.title, sum(ms_played), count(albums.title)')
+
+        # GENRES
+        # @total_num_genres = report.genres.count
+        # @top_genres = report.genres.order_by_count
+        # @top_genres = report.genres.order_by_ms_played  
+        # @top_genres = report.genres.group('name').limit(10).order('count(name) DESC').pluck('name, sum(ms_played), count(name)')
+        # OR @top_genres = report.genres.group('name').limit(10).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)')
 
     end
 
@@ -49,6 +80,9 @@ class ReportsController < ApplicationController
 
     def destroy
         Report.find_by(id: params[:id]).destroy
+
+        # TODO: DESTROY RECORDS WITH REPORT ID FROM ALL OTHER TABLES
+
         redirect_to user_reports_path(current_user)
     end
 

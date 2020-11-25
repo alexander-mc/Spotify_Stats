@@ -14,14 +14,80 @@ class Report < ApplicationRecord
     def attachment_errors_exist?
         errors[:attachment].present?
     end
-
+    
+    # Pull streaming history data that requires authorization
+    # user = RSpotify::User.new(session[:credentials])
+    
     def load_streaming_history(session)
+        
         file = File.read(attachment.file.file)
         streaming_history = JSON.parse(file)
-        ## TO DO
-        binding.pry
-        user = RSpotify::User.new(session[:credentials])
-        binding.pry
+        
+        streaming_history.each do |hash|
+            
+            track_name = hash["trackName"]
+            artist_name = hash["artistName"]
+
+            query_tracks = RSpotify::Track.search(track_name)
+            
+            track = query_tracks.select do |t|
+              t.artists.any?{|a| a.name == artist_name}
+            end
+
+            # Query artists in addition to tracks (WARNING: SLOW)
+            # query_tracks = RSpotify::Track.search(track_name)
+            # query_artists = RSpotify::Artist.search(artist_name)
+            # query_artist_names = query_artists.map{|a| a.name}
+            
+            # query_track = query_tracks.select do |t|
+            #   t.artists.any? do |a|
+            #     query_artist_names.include?(a.name)
+            #   end
+            # end
+          
+            track = query_track.first
+
+            if track.nil?
+                self.missing_songs += 1
+                save
+                next
+            end
+
+            # Convert information from simple to full
+            # track.complete!
+            # track.album.complete!
+            # track.artists.each{|a| a.complete!}
+
+            song = Song.find_by(spotify_id: track.id)
+          
+            if !song.present?
+          
+              artist_ids = []
+              track.artists.each do |a|
+                artist = Artist.find_or_create_by(spotify_id: a.id)
+                artist.update(name: a.name)
+                artist_ids << artist.id
+              end
+          
+              genre_ids = []
+              track.artists.each do |a|
+                a.genres.each do |g|
+                  genre = Genre.find_or_create_by(name: g)
+                  genre_ids << genre.id
+                end
+              end
+              
+              album = Album.find_or_create_by(spotify_id: track.album.id)
+              album.update(title: track.album.name, image_url: track.album.images[1]["url"]) # Numbers correspond to image size (0 -> 640x640, 1 -> 300x300, 2 -> 64x64)
+          
+              song = album.songs.create(spotify_id: track.id, title: track.name, preview_url: track.preview_url, external_url: track.external_urls["spotify"], artist_ids: artist_ids, genre_ids: genre_ids)
+            
+            end
+          
+            self.song_reports.create(song_id: song.id, end_time: hash["endTime"].to_datetime, ms_played: hash["msPlayed"])
+          
+        end
+          
     end
 
 end
