@@ -3,3 +3,105 @@
 <% end %>
 
 <%= link_to 'Main', user_reports_path(current_user) %>
+
+
+<h3>Between</h3>
+<h3><%= @start_date %> - <%= @end_date %></h3>
+<br>
+<p>You listened to:</p>
+<h3><%= @total_num_songs %> songs</h3>
+<h3>(that's ~<%= @total_time %>)</h3>
+
+
+<h3><%= @total_num_uniq_songs %> unique songs</h3>
+
+<h3>Song</h3>
+<h3>Total time</h3>
+<h3>Times played</h3>
+
+<ol>
+  <% @top_songs.each do |song| %>
+
+    <% s = find_song_by_title(song[0]) %>
+
+    <% if s.preview_url.nil? %>
+      <li><a href="<%= s.external_url %>" target="_blank"><img src="<%= s.album.image_url %>" alt="album cover" class="album-cover"></a>
+    <% else %>
+      <li><img src="<%= s.album.image_url %>" onclick="playPause('<%= s.id %>')" alt="album cover" class="album-cover">
+      <audio preload="auto" id="<%= s.id %>">
+        <source src="<%= s.preview_url %>">
+      </audio>
+    <% end %>
+
+    <%= link_to song[0], external_url(s), target: :_blank %><br>
+
+    <% list = s.artists.uniq { |a| a.name } %>
+    <p>(<%= list_external_urls(list) %>)</p>
+
+    <%= format_time(song[1]) %><br>
+    <%= song[2] %>x<br>
+
+  <% end %>
+</ol>
+
+
+<h3><%= @total_num_uniq_artists %> unique artists</h3>
+
+<h3>Artist</h3>
+<h3>Total time</h3>
+<h3>Times played</h3>
+
+<ol>
+  <% @top_artists.each do |artist| %>
+
+    <li><%= link_to artist[0], external_url(find_artist_by_name(artist[0])), target: :_blank %><br>
+    <%= format_time(artist[1]) %><br>
+    <%= artist[2] %>x<br>
+
+  <% end %>
+</ol>
+
+
+<h3><%= @total_num_uniq_albums %> unique albums</h3>
+
+<h3>Album</h3>
+<h3>Total time</h3>
+<h3>Times played</h3>
+
+<ol>
+  <% @top_albums.each do |album| %>
+
+    <li><%= link_to album[0], external_url(find_album_by_title(album[0])), target: :_blank %><br>
+    
+    <% list = find_album_by_title(album[0]).artists.uniq { |a| a.name } %>
+    <p>(<%= list_external_urls(list) %>)</p>
+
+    <%= format_time(album[1]) %><br>
+    <%= album[2] %>x<br>
+
+  <% end %>
+</ol>
+
+
+<h3><%= @total_num_uniq_genres %> unique genres</h3>
+
+<h3>Genre</h3>
+<h3>Total time</h3>
+<h3>Times played</h3>
+
+<ol>
+  <% @top_genres.each do |genre| %>
+
+    <li><%= genre[0] %><br>
+    <%= format_time(genre[1]) %><br>
+    <%= genre[2] %>x<br>
+
+  <% end %>
+</ol>
+
+<%#= @total_num_artists %>
+<%#= @top_artists %>
+<%#= @total_num_albums %>
+<%#= @top_albums %>
+<%#= @total_num_genres %>
+<%#= @top_genres %>

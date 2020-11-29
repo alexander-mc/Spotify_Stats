@@ -6,7 +6,7 @@ class Artist < ApplicationRecord
     has_many :reports, through: :songs
     has_many :users, through: :reports
 
-    scope :order_by_count, -> { group('name').limit(10).order('count(name) DESC').pluck('name, sum(ms_played), count(name)') }
-    #scope :order_by_ms_played, -> { group('name').limit(10).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)') }
+    scope :order_by_count, -> (options) { group('name').limit(options[:limit]).order('count(name) DESC').pluck('name, sum(ms_played), count(name)') }
+    #scope :order_by_ms_played, -> (options) { group('name').limit(options[:limit]).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)') }
 
 end

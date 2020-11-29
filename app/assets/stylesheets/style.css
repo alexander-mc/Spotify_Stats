@@ -1,0 +1,47 @@
+html {
+    background-color: rgb(30, 30, 30);
+    /* color: white; */
+    /* height: 100%;
+    margin: 0; */ 
+}
+
+.background-color {
+    /* background: linear-gradient(to right, hsl(192, 100%, 64%),hsla(59, 94%, 67%, 0.945));  */
+}
+
+.welcome-image {
+    background-image: url(binary_rain.png);
+    height: 550px;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: solid 1px green;
+
+    position: relative;
+    z-index: 0;
+    /* background-position: center; */
+    /* position: relative; */
+}
+
+.welcome-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: linear-gradient(to right, hsl(192, 97%, 65%),hsl(305, 97%, 69%)); 
+    /* background: linear-gradient(to right, rgb(59, 235, 255), rgb(255, 27, 236);  */
+    mix-blend-mode: multiply;   
+}
+
+.welcome-content {
+    color: white;
+}
+
+/* .website-title h1 {
+    font-family: 'website-title', sans-serif;
+    font-weight: normal;
+    font-size: 8vw;
+} */

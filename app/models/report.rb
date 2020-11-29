@@ -11,6 +11,8 @@ class Report < ApplicationRecord
     mount_uploader :attachment, AttachmentUploader
     validates :attachment, presence: { message: "was not entered" }, unless: :attachment_errors_exist?
 
+    before_destroy :destroy_song_reports
+
     def attachment_errors_exist?
         errors[:attachment].present?
     end
@@ -30,7 +32,7 @@ class Report < ApplicationRecord
 
             query_tracks = RSpotify::Track.search(track_name)
             
-            track = query_tracks.select do |t|
+            query_track = query_tracks.select do |t|
               t.artists.any?{|a| a.name == artist_name}
             end
 
@@ -88,6 +90,12 @@ class Report < ApplicationRecord
           
         end
           
+    end
+
+    private
+
+    def destroy_song_reports
+      song_reports.in_batches(of: 1000).delete_all
     end
 
 end

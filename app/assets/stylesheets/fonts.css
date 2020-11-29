@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'website-title';
+    src: url('../fonts/wearesurvivors.woff2') format('woff2'),
+         url('../fonts/wearesurvivors.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

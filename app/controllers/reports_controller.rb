@@ -24,42 +24,40 @@ class ReportsController < ApplicationController
     end
 
     def show
-        
-        binding.pry
-        ### TO DO ###
-        # report = Report.find_by(id: params[:id])
+        report = Report.find_by(id: params[:id])
 
-        # @start_date = report.song_reports.start_date
-        # @end_date = report.song_reports.end_date
+        @start_date = report.song_reports.start_date
+        @end_date = report.song_reports.end_date
+        
+        # TOTAL TIME (including est for missing songs)
+        # Missing songs =  2.5min * 1000 ms/min (in 2019, the avg song length is ~ 3min... 2.5min accounts for songs only partially listened to + continued decline in song length)
+        time = report.song_reports.total_time + (report.missing_songs * 2.5 * 60 * 1000)
+        hours = time / (1000 * 60 * 60) #(ms * sec/min * min/hr)
+        minutes = (hours - hours.round(-1)) * 60
+
+        @total_num_songs = report.songs.count + report.missing_songs
+        @total_time = "#{hours.round(-1)} Hours, #{minutes.round} Minutes"
+        # @total_time = Time.at(time/1000).utc.strftime("%d Days, %-H Hours, %-M Minutes")
 
         # SONGS
-        # @total_num_songs = report.songs.count
-        # @top_songs = report.songs.order_by_count
-        # @top_songs = report.songs.order_by_ms_played
-        # @top_songs = report.songs.group('title').limit(10).order('count(title) DESC').pluck('title, sum(ms_played), count(title)')
-        # @top_songs = report.songs.group('title').limit(10).order('sum(ms_played) DESC').pluck('title, sum(ms_played), count(title)')
+        @total_num_uniq_songs = report.songs.uniq{|s| s.id}.count
+        @top_songs = report.songs.order_by_count(limit: 10)
+        # @top_songs = report.songs.order_by_ms_played(limit: 10)
 
         # ARTISTS
-        # @total_num_artists = report.artists.count
-        # @top_artists = report.artists.order_by_count
-        # @top_artists = report.artists.order_by_ms_played   
-        # @top_artists = report.artists.group('name').limit(10).order('count(name) DESC').pluck('name, sum(ms_played), count(name)')
-        # OR @top_artists = report.artists.group('name').limit(10).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)')
+        @total_num_uniq_artists = report.artists.uniq{|a| a.id}.count
+        @top_artists = report.artists.order_by_count(limit: 10)
+        # @top_artists = report.artists.order_by_ms_played(limit: 10)
 
         # ALBUMS
-        # @total_num_albums = report.albums.count
-        # @top_albums = report.albums.order_by_count
-        # @top_albums = report.albums.order_by_ms_played  
-        # @top_albums = report.albums.group('albums.title').limit(10).order('count(albums.title) DESC').pluck('albums.title, sum(ms_played), count(albums.title)')
-        # OR @top_albums = report.albums.group('albums.title').limit(10).order('sum(ms_played) DESC').pluck('albums.title, sum(ms_played), count(albums.title)')
+        @total_num_uniq_albums = report.albums.uniq{|a| a.id}.count
+        @top_albums = report.albums.order_by_count(limit: 10)
+        # @top_albums = report.albums.order_by_ms_played(limit: 10)
 
         # GENRES
-        # @total_num_genres = report.genres.count
-        # @top_genres = report.genres.order_by_count
-        # @top_genres = report.genres.order_by_ms_played  
-        # @top_genres = report.genres.group('name').limit(10).order('count(name) DESC').pluck('name, sum(ms_played), count(name)')
-        # OR @top_genres = report.genres.group('name').limit(10).order('sum(ms_played) DESC').pluck('name, sum(ms_played), count(name)')
-
+        @total_num_uniq_genres = report.genres.uniq{|g| g.id}.count
+        @top_genres = report.genres.order_by_count(limit: 10)
+        # @top_genres = report.genres.order_by_ms_played(limit: 10)
     end
 
     def edit
@@ -80,9 +78,6 @@ class ReportsController < ApplicationController
 
     def destroy
         Report.find_by(id: params[:id]).destroy
-
-        # TODO: DESTROY RECORDS WITH REPORT ID FROM ALL OTHER TABLES
-
         redirect_to user_reports_path(current_user)
     end
 
