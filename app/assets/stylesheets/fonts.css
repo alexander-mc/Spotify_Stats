@@ -1,7 +1,11 @@
 @font-face {
     font-family: 'website-title';
-    src: url('../fonts/wearesurvivors.woff2') format('woff2'),
-         url('../fonts/wearesurvivors.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    src: url('../fonts/kiona-regular.woff2') format('woff2'),
+         url('../fonts/kiona-regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'website-content';
+    src: url('../fonts/arcon-regular.woff2') format('woff2'),
+         url('../fonts/arcon-regular.woff') format('woff');
 }
