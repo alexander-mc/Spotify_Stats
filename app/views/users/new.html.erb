@@ -1,27 +1,37 @@
-<main>   
-    <section id="signup-msg-box" class="msg-box">
+<div class="welcome-image">
+    <main class="registration-content">
+        <header class="registration-title">
+            <h1>SPOTIFY<br>STATS</h1>
+        </header>
         <% if flash[:signup_errors] %>
-            <% if flash[:signup_errors].count == 1 %>
-                <%= flash[:signup_errors].join %>
-            <% else %>
-                <ul>
-                <% flash[:signup_errors].each do |error| %>
-                    <li><%= error %>
+            <section class="msg-box" id="signup-msg-box">
+                <% if flash[:signup_errors].count == 1 %>
+                    <%= flash[:signup_errors].join %>
+                <% else %>
+                    <ul>
+                        <% flash[:signup_errors].each do |error| %>
+                            <li><%= error %>
+                        <% end %>
+                    </ul>
                 <% end %>
-                </ul>
-            <% end %>
+            </section>
         <% end %>
-    </section>
-    
-    <section class="registration-form">
-        <%= form_for @user do |f| %>
-            <%= f.text_field :username, placeholder: "Username" %><br>
-            <%= f.password_field :password, placeholder: "Password" %><br>
-            <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %><br>
-            <%= f.submit 'Sign Up' %>
-        <% end %>
-
-        OR <%= link_to 'Log In', login_path %><br>
-        <%= link_to 'Log in with Spotify', authentication_path %>
-    </section>
-</main>
+        <div class="registration-form-container">
+            <section class="registration-form">
+                <%= form_for @user do |f| %>
+                    <%= f.text_field :username, placeholder: "Username" %>
+                    <%= f.password_field :password, placeholder: "Password" %>
+                    <%= f.password_field :password_confirmation, placeholder: "Re-Enter Password" %>
+                    <%= f.submit 'SIGN UP', class: "btn-registration-submit" %>
+                <% end %>
+            </section>
+            <section class="registration-form-links">
+                <span class="registration-links-break">
+                    <p>OR</p>
+                </span>
+                <%= link_to 'LOG IN WITH APP', login_path, class: "btn-registration-alt" %>
+                <%= link_to 'LOG IN WITH SPOTIFY', authentication_path, class: "btn-registration-alt" %>
+            </section>
+        </div>
+    </main>
+</div>

@@ -35,7 +35,7 @@ body, html {
     bottom: 0;
 } */
 
-#welcome-content {
+.welcome-content, .registration-content  {
     color: white;
     text-align: center;
     width: 95%;
@@ -45,26 +45,248 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
-#welcome-content h4 {
+.website-title h1, .registration-title h1 {
+    font-family: 'website-title', sans-serif;
+    font-weight: normal;
+    font-size: 88px;
+    margin: auto;
+    /* border: 1px solid green; */
+}
+
+#welcome-description, .welcome-links-break p, .registration-links-break p {
+    /* border: 1px solid green; */
     font-family: 'website-content', sans-serif;
-    font-size: 1.3em;
+    font-size: 25px;
     font-weight: 100;
+
+    position: relative;
+    top: .799em;
+}
+
+.welcome-content h4 {
     margin: 9px auto;
 }
-
-#welcome-content p {
+/* 
+.welcome-content p {
     font-family: 'website-content', sans-serif;
     font-size: 1em;
     margin: 10px auto;
+} */
+
+#welcome-links {
+    padding: 3px 0px;
+    border-radius: 3px;
+    position: relative;
+    margin: 0 auto;
+    /* border: 1px solid rgb(212, 212, 212); */
+    width: 226px;
+    /* background-color: rgba(146, 146, 146, 0.274); */
+    
+    top: 2.8em;
 }
 
-.website-title h1 {
-    font-family: 'website-title', sans-serif;
-    font-weight: normal;
-    font-size: 9vw;
-    margin: auto;
-    margin-top: ;
+.btn-sign-up-app, .btn-log-in-app, .btn-log-in-spotify, .btn-registration-submit, .btn-registration-alt {
+    display: inline-block;
+    margin: 5px auto;
+    width: 220px;
+    padding: 7px 0px 6px 0;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.959);
+    /* border: 1px solid rgba(187, 187, 187, 0.959); */
+
+    cursor: pointer;
+
+    transition: all 0.4s;
+
+    font-family: 'website-content', sans-serif;
+    color: rgb(95, 95, 95);
+    font-size: .86em;
+    font-weight: bolder;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.btn-sign-up-app:active, .btn-log-in-app:active, .btn-log-in-spotify:active, .btn-registration-submit:active, .btn-registration-alt:active  {
+    transform: scale(.98);
+}
+
+.btn-sign-up-app:hover, .btn-log-in-app:hover {
+    background-color: rgba(240, 240, 240, 0.925);
+    color: rgba(49, 49, 49, 0.877);
+}
+
+.btn-log-in-spotify:hover {
+    background-color: rgb(56, 151, 128);
+}
+
+.welcome-links-break, .registration-links-break {
+    display: block;
+}
+
+.welcome-links-break p, .registration-links-break p {
+    font-size: .75em;
+    display: inline;
+
+    position: relative;
+    top: 1px;
+}
+
+.btn-log-in-spotify {
+    background-color: rgb(70, 182, 154);
+    color: #fff;
+    border: none;
+}
+
+.welcome-links-break::before, .welcome-links-break::after, .registration-links-break::before, .registration-links-break::after {
+    content: "";
+    display: inline-block;
+    background-image: linear-gradient(to right,rgb(212, 212, 212), rgba(212, 212, 212));
+    height: 1px;
+    width: 92px;
+    
+    position: relative;
+    top: -3px;
+}
+
+.registration-content {
+    border-radius: 20px;
+    border: 1px solid rgba(233, 233, 233, 0.795);
+    background-color: rgba(180, 180, 180, 0.075);
+    width: 265px;
+    padding: 9px 0 9px 0;
+}
+
+.registration-title h1 {
+    font-size: 52px;
+}
+
+.registration-form {
+    /* border: 1px solid green; */
+    padding-top: 10px;
+}
+
+form input[type="text"], form input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    font-size: 14px;
+    width: 190px;
+    border-radius: 3px;
+    height: 11px;
+    padding: 10px;
+    border: none;
+    margin-bottom: 8px;
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus{
+    outline: none;
+    box-shadow: 0 0 0 1.5px hsla(182, 100%, 57%, 0.74);
+    background: hsl(189, 41%, 97%);
+}
+
+.btn-registration-submit, .btn-registration-alt {
+    display: block;
+    margin: 0 auto;
+    font-size: 14px;
+    width: 210px;
+    border-radius: 3px;
+    height: 31px;
+
+    background-color: rgb(70, 182, 154);
+    color: #fff;
+
+    padding: 0px;
+    outline: none;
+    border: none;
+}
+
+.btn-registration-submit:hover {
+    background-color: rgb(56, 151, 128);
+}
+
+.registration-links-break {
+    padding: 10px 0 10px 0;
+}
+
+.btn-registration-alt {
+    margin-bottom: 8px;
+    line-height: 32px;
+
+    /* background-color: rgba(255, 255, 255, 0.959);
+    color: rgb(95, 95, 95); */
+
+    background-color: rgba(202, 202, 202, 0.959);
+    color: rgb(85, 85, 85);
+}
+
+.btn-registration-alt:hover {
+    background-color: rgba(245, 245, 245, 0.966);
+    color: rgba(49, 49, 49, 0.877);
+}
+
+.msg-box {
+    background-color: hsl(54, 94%, 66%);
+    color: rgb(26, 26, 26);
+    /* border: 1px solid white; */
+
+    padding: 7px 7px;
+    margin: 5px 15px 5px 15px;
+    border-radius: 3.5px;
+
+    font-family: Arial;
+    font-size: 14px;
+}
+
+.msg-box ul {
+    padding: 0 0 0 18px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Breakpoints */
+
+@media only screen and (max-width: 800px) {
+    .website-title h1 {
+        font-size: 11vw;
+    }
+    #welcome-description h4 {
+        font-size: 3.13vw;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .website-title h1 {
+        font-size: 69px;
+    }
+    #welcome-description h4 {
+        font-size: 19.8px;
+    }
+}
+
+@media only screen and (max-width: 570px) {
+    .website-title h1 {
+        font-size: 69px;
+        /* border: 1px solid green; */
+        width: 345px;     
+    }
+    #welcome-description {
+        display: none;
+    }
+    #welcome-links {
+        top: 0.3em;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .website-title h1 {
+        width: auto;     
+    }
+    #welcome-description {
+        display: none;
+    }
+    #welcome-links {
+        top: 0.3em;
+    }
 }

@@ -11,10 +11,9 @@ class SessionsController < ApplicationController
 
         if user.try(:authenticate, params[:user][:password])
             session[:user_id] = user.id
-            binding.pry
             redirect_to authentication_path
         else
-            flash[:login_error] = "Sorry, we could not find that username and/or password. Please try again."
+            flash[:login_error] =  "Sorry, that username and/or password could not be found."
             redirect_to login_path
             # Use redirect over render. If user == nil, nil will be passed to the new form builder's user object, resulting in an error.
             # Render would be more appropriate for the signup page, not the login page, since the user instance variable cannot be nil.

@@ -18,7 +18,7 @@ class User < ApplicationRecord
               presence: { message: "was not entered" },
               length: { minimum: 6, message: "must contain more than 6 characters"},
               format: { without: /\s/, message: "cannot include spaces"},
-              confirmation: { message: "does not match password" }
+              confirmation: { message: "did not match password" }
 
     scope :find_by_ci_username, -> (username) { where('lower("username") = ?', username.downcase).first }
     #scope :ci_find, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
@@ -30,15 +30,15 @@ class User < ApplicationRecord
         logged_in_user = User.find_by(id: session[:user_id])
         already_existing_user = User.find_by(spotify_uid: auth_hash[:uid])
 
-        # Sign up users
-        if signing_in?(logged_in_user) && already_existing_user.present?
+        # Sign ups that already have an account due to a prior log in with Spotify
+        if signing_up?(logged_in_user) && already_existing_user.present?
 
-            # Reconcile sign ups with existing accounts (due to prior log in through Spotify)
-            if already_existing_user.has_spotify_user_data?
+            # Username already exists
+            if already_existing_user.username?
                 logged_in_user.destroy
                 return "Existing linked account"
 
-            # Sign ups without an existing account
+            # Username does not exist
             else
                 already_existing_user.update(username: logged_in_user.username, password_digest: logged_in_user.password_digest)
                 already_existing_user.save(validate: false)
@@ -46,7 +46,7 @@ class User < ApplicationRecord
                 logged_in_user.destroy
             end
 
-        # Log in users (through App or Spotify)
+        # Log ins through App or Spotify + new sign ups (i.e. user has never logged in with Spotify)
         else
             current_user = User.find_or_create_by(spotify_uid: auth_hash[:uid])
             current_user.spotify_username = auth_hash[:info][:display_name]
@@ -58,12 +58,8 @@ class User < ApplicationRecord
 
     end
 
-    def self.signing_in?(user)
+    def self.signing_up?(user)
         user.spotify_uid.blank? if user.present?
-    end
-
-    def has_spotify_user_data?
-        spotify_uid.present?
     end
 
 end

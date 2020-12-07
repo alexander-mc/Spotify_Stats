@@ -1,16 +1,19 @@
 <div class="welcome-image">
-    <div id="welcome-content">
+    <main class="welcome-content">
         <header class="website-title">
             <h1>SPOTIFY STATS</h1>
         </header>
-        <section>
+        <section id="welcome-description">
             <h4>Why wait until the end of the year to view your music history?</h4>
             <h4>Understand your Spotify listening behavior much sooner.</h4>
-            <%= link_to 'Sign Up', new_user_path %><br>
-            <%= link_to 'Log In', login_path %>
-            <p>OR</p>
-            <br>
-            <%= link_to 'Log In with Spotify', authentication_path %>
         </section>
-    </div>
+        <section id="welcome-links">
+            <%= link_to 'SIGN UP', new_user_path, class: "btn-sign-up-app" %><br>
+            <%= link_to 'LOG IN', login_path, class: "btn-log-in-app" %>
+            <span class="welcome-links-break">
+                <p>OR</p>
+            </span>
+            <%= link_to 'LOG IN WITH SPOTIFY', authentication_path, class: "btn-log-in-spotify"  %>
+        </section>
+    </main>
 </div>

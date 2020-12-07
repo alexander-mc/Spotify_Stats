@@ -1,12 +1,28 @@
-<section id="login-msg-box" class="msg-box">
-    <%= flash[:login_error] if flash[:login_error]%>
-</section>
-
-<%= form_for @user, url: login_path do |f| %>
-    <%= f.text_field :username, placeholder: "Username" %><br>
-    <%= f.password_field :password, placeholder: "Password" %><br>
-    <%= f.submit "Log In" %>
-<% end %>
-
-OR <%= link_to 'Sign Up', new_user_path %><br>
-<%= link_to 'Log in with Spotify', authentication_path %>
+<div class="welcome-image">
+    <main class="registration-content">
+        <header class="registration-title">
+            <h1>SPOTIFY<br>STATS</h1>
+        </header>
+        <% if flash[:login_error] %>
+            <section class="msg-box" id="login-msg-box">
+                <%= flash[:login_error] %>
+            </section>
+        <% end %>
+        <div class="registration-form-container">
+            <section class="registration-form">
+                <%= form_for @user, url: login_path do |f| %>
+                    <%= f.text_field :username, placeholder: "Username" %>
+                    <%= f.password_field :password, placeholder: "Password" %>
+                    <%= f.submit "LOG IN", class: "btn-registration-submit" %>
+                <% end %>
+            </section>
+            <section class="registration-form-links">
+                <span class="registration-links-break">
+                    <p>OR</p>
+                </span>
+                <%= link_to 'SIGN UP', new_user_path, class: "btn-registration-alt" %>
+                <%= link_to 'LOG IN WITH SPOTIFY', authentication_path, class: "btn-registration-alt" %>
+            </section>
+        </div>
+    </main>
+</div>
