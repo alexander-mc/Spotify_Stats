@@ -1,9 +1,13 @@
-<section id="report-msg-box" class="msg-box">
-    <% if flash[:report_errors] %>
-        <ul>
-        <% flash[:report_errors].each do |error| %>
-            <li><%= error %>
+<% if flash[:report_errors] %>
+    <section class="msg-box">
+        <% if flash[:report_errors].count == 1 %>
+            <%= flash[:report_errors].join %>
+        <% else %>
+            <ul>
+                <% flash[:report_errors].each do |error| %>
+                    <li><%= error %>
+                <% end %>
+            </ul>
         <% end %>
-        </ul>
-    <% end %>
-</section>
+    </section>
+<% end %>

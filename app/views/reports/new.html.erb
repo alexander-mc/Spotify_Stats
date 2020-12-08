@@ -1,5 +1,6 @@
 <h2>Upload your Spotify listening history</h2>
 
+<%= render 'header_index' %>
 <%= render 'report_errors' %>
 
 <%= form_for @report, url: user_reports_path(current_user) do |f| %>

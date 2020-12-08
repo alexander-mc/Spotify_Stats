@@ -6,7 +6,9 @@ class Report < ApplicationRecord
     has_many :genres, through: :songs
     has_many :albums, through: :songs
 
-    validates :report_name, presence: { message: "was not entered" }
+    validates :report_name,
+              presence: { message: "was not entered" }
+              # length: { maximum: 30, too_long: "can only be 1-%{count} characters long" }
 
     mount_uploader :attachment, AttachmentUploader
     validates :attachment, presence: { message: "was not entered" }, unless: :attachment_errors_exist?

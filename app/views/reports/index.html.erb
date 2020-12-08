@@ -1,19 +1,22 @@
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='Log Out'>
-<% end %>
-
-<section id="index-msg-box" class="msg-box">
-    <%= flash[:page_error] if flash[:page_error]%>
-</section>
-
-<br><br>
-
-<% @reports.each do |report| %>
-    <%= link_to report.report_name, user_report_path(current_user, report) %>
-    <%= link_to 'Edit', edit_user_report_path(current_user, report) %>
-    <%= button_to "Delete", user_report_path(current_user, report), method: :delete, data: { confirm: "Are you sure you want to delete this report?" } %>
-    <br>
-
-<% end %>
-
-<%= link_to 'Add Report', new_user_report_path(current_user) %>
+<div class="welcome-image">
+  <main class="setup-wrapper">
+    <%= render 'header_index' %>
+    <% if flash[:page_error] %>
+      <section id="index-msg-box" class="msg-box">
+          <%= flash[:page_error] %>
+      </section>
+    <% end %>
+    <section class="report-folders">
+        <% @reports.each do |report| %>
+            <div class="existing-report-folder">
+              <%= link_to report.report_name.upcase, user_report_path(current_user, report), class: "report-name" %>
+              <%= link_to image_tag("btn-edit-2-bw.png", alt: "Edit report", title: "Edit"), edit_user_report_path(current_user, report), class: "edit-report" %>
+              <%= link_to image_tag("btn-delete-5-bw.png", alt: "Delete report", title: "Delete"), user_report_path(current_user, report), method: :delete, data: { confirm: "Are you sure you want to delete this report?" }, class: "delete-report" %>
+            </div>
+        <% end %>
+      <div>
+        <%= link_to image_tag("add-icon-bw.png", alt: "Add report") + 'ADD REPORT', new_user_report_path(current_user), class: "add-report" %>
+      </div>
+    </section>
+  </main>
+</div>

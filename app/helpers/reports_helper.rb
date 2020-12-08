@@ -1,5 +1,9 @@
 module ReportsHelper
 
+    def find_username
+        current_user.username.empty? ? current_user.spotify_uid : current_user.username
+    end
+
     def find_song_by_title(title)
         Song.find_by(title: title)
     end

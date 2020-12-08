@@ -89,7 +89,7 @@ class ReportsController < ApplicationController
 
     def validate_user_id
         if params[:user_id].to_i != current_user.id
-            flash[:page_error] = "That page could not be accessed."
+            flash[:page_error] = "That page could not be accessed"
             redirect_to user_reports_path(current_user) 
             # You must include the current_user in parentheses.
             # Otherwise, params[:user_id] will not be reset (i.e. will stay incorrect)
@@ -100,7 +100,7 @@ class ReportsController < ApplicationController
         report = current_user.reports.find_by(id: params[:id])
         
         if report.blank?
-            flash[:page_error] = "That report does not exist."
+            flash[:page_error] = "That report does not exist"
             redirect_to user_reports_path(current_user)
         end
     end
