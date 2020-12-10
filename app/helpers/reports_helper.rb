@@ -1,5 +1,15 @@
 module ReportsHelper
 
+    def find_first_name
+        if current_user.spotify_username.present?
+            current_user.spotify_username.split.first
+        elsif current_user.username.present?
+            current_user.username
+        else
+            current_user.spotify_uid
+        end
+    end
+
     def find_username
         current_user.username.empty? ? current_user.spotify_uid : current_user.username
     end
@@ -23,7 +33,7 @@ module ReportsHelper
     def format_time(time)
         hours = time.to_f / (1000 * 60 * 60) #(ms * sec/min * min/hr)
         minutes = (hours - hours.floor) * 60
-        hours.floor == 0 ? "#{minutes.floor}M" : "#{hours.round}H, #{minutes.floor}M"
+        hours.floor == 0 ? "#{minutes.floor}m" : "#{hours.round}h, #{minutes.floor}m"
     end
 
     def external_url(object)

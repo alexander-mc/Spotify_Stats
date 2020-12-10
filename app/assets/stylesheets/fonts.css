@@ -9,3 +9,9 @@
     src: url('../fonts/arcon-regular.woff2') format('woff2'),
          url('../fonts/arcon-regular.woff') format('woff');
 }
+
+@font-face {
+    font-family: 'report-heading';
+    src: url('../fonts/roboto-bold.woff2') format('woff2'),
+         url('../fonts/roboto-bold.woff') format('woff');
+}

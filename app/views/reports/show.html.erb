@@ -1,107 +1,126 @@
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='Log Out'>
-<% end %>
-
-<%= link_to 'Main', user_reports_path(current_user) %>
-
-
-<h3>Between</h3>
-<h3><%= @start_date %> - <%= @end_date %></h3>
-<br>
-<p>You listened to:</p>
-<h3><%= @total_num_songs %> songs</h3>
-<h3>(that's ~<%= @total_time %>)</h3>
-
-
-<h3><%= @total_num_uniq_songs %> unique songs</h3>
-
-<h3>Song</h3>
-<h3>Total time</h3>
-<h3>Times played</h3>
-
-<ol>
-  <% @top_songs.each do |song| %>
-
-    <% s = find_song_by_title(song[0]) %>
-
-    <% if s.preview_url.nil? %>
-      <li><a href="<%= s.external_url %>" target="_blank"><img src="<%= s.album.image_url %>" alt="album cover" class="album-cover"></a>
-    <% else %>
-      <li><img src="<%= s.album.image_url %>" onclick="playPause('<%= s.id %>')" alt="album cover" class="album-cover">
-      <audio preload="auto" id="<%= s.id %>">
-        <source src="<%= s.preview_url %>">
-      </audio>
-    <% end %>
-
-    <%= link_to song[0], external_url(s), target: :_blank %><br>
-
-    <% list = s.artists.uniq { |a| a.name } %>
-    <p>(<%= list_external_urls(list) %>)</p>
-
-    <%= format_time(song[1]) %><br>
-    <%= song[2] %>x<br>
-
-  <% end %>
-</ol>
-
-
-<h3><%= @total_num_uniq_artists %> unique artists</h3>
-
-<h3>Artist</h3>
-<h3>Total time</h3>
-<h3>Times played</h3>
-
-<ol>
-  <% @top_artists.each do |artist| %>
-
-    <li><%= link_to artist[0], external_url(find_artist_by_name(artist[0])), target: :_blank %><br>
-    <%= format_time(artist[1]) %><br>
-    <%= artist[2] %>x<br>
-
-  <% end %>
-</ol>
-
-
-<h3><%= @total_num_uniq_albums %> unique albums</h3>
-
-<h3>Album</h3>
-<h3>Total time</h3>
-<h3>Times played</h3>
-
-<ol>
-  <% @top_albums.each do |album| %>
-
-    <li><%= link_to album[0], external_url(find_album_by_title(album[0])), target: :_blank %><br>
-    
-    <% list = find_album_by_title(album[0]).artists.uniq { |a| a.name } %>
-    <p>(<%= list_external_urls(list) %>)</p>
-
-    <%= format_time(album[1]) %><br>
-    <%= album[2] %>x<br>
-
-  <% end %>
-</ol>
-
-
-<h3><%= @total_num_uniq_genres %> unique genres</h3>
-
-<h3>Genre</h3>
-<h3>Total time</h3>
-<h3>Times played</h3>
-
-<ol>
-  <% @top_genres.each do |genre| %>
-
-    <li><%= genre[0] %><br>
-    <%= format_time(genre[1]) %><br>
-    <%= genre[2] %>x<br>
-
-  <% end %>
-</ol>
-
-<%#= @total_num_artists %>
-<%#= @top_artists %>
-<%#= @total_num_albums %>
-<%#= @top_albums %>
-<%#= @total_num_genres %>
-<%#= @top_genres %>
+<div class="report-background">
+  <main class="report-wrapper">
+    <nav class="report-nav">
+      <div class="txt-username">
+        <p><%= find_username.upcase %></p>
+      </div>
+      <div class="txt-dashboard">
+        <%= link_to 'DASHBOARD', user_reports_path(current_user) %>
+      </div>
+      <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+        <input type=submit value='LOG OUT' class='btn-log-out'>
+      <% end %>
+    </nav>
+    <div class="txt-first-name">
+      <h1><%= find_first_name.upcase + "," %></h1>
+    </div>
+    <hr>
+    <section class="report-dates">
+      <h4 class="txt-between">BETWEEN</h4>
+      <h2><%= @start_date %> - <%= @end_date %></h2>
+      <h4 class="txt-you-listened-to">YOU LISTENED TO:</h4>
+    </section>
+    <hr>
+    <section class="report-total-songs">
+      <h2><%= @total_num_songs %> SONGS</h2>
+      <h4>(THAT'S ~<%= @total_time.upcase %>)</h4>
+    </section>
+    <section class="report-sub-container", id="report-unique-songs">
+      <h2><%= @total_num_uniq_songs %> UNIQUE SONGS</h2>
+      <ol class="report-grid">
+        <p class="report-grid-row-1 col-1">SONG</p>  
+        <p class="report-grid-row-1 col-2">TOTAL<span>TIME</span></p>
+        <p class="report-grid-row-1 col-3">TIMES<span>PLAYED</span></p>
+        <div class="row-border-1"></div>
+        <% @top_songs.each do |song| %>
+          <div class="report-grid-row-2 col-1" id="report-links-unique-songs">
+            <% s = find_song_by_title(song[0]) %>
+            <% if s.preview_url.nil? %>
+              <li><p><a href="<%= s.external_url %>" target="_blank"><img src="<%= s.album.image_url %>" alt="album cover" class="album-cover"></a></p></li>
+            <% else %>
+                <li><p><img src="<%= s.album.image_url %>" onclick="playPause('<%= s.id %>')" alt="album cover" class="album-cover"></p></li>
+                <audio preload="auto" id="<%= s.id %>">
+                  <source src="<%= s.preview_url %>">
+                </audio>
+            <% end %>
+            <p><%= link_to song[0], external_url(s), target: :_blank %>
+            <% list = s.artists.uniq { |a| a.name } %>
+            (<%= list_external_urls(list) %>)</p>
+          </div>
+          <div class="report-grid-row-2 col-2">
+            <p><%= format_time(song[1]) %></p>
+          </div>
+          <div class="report-grid-row-2 col-3">
+            <p><%= song[2] %>x</p>
+          </div>
+          <div class="row-border-2"></div>
+        <% end %>
+      </ol>
+    </section>
+    <section class="report-sub-container", id="report-unique-artists">
+      <h2><%= @total_num_uniq_artists %> UNIQUE ARTISTS</h2>
+      <ol class="report-grid">
+        <p class="report-grid-row-1 col-1">ARTIST</p>  
+        <p class="report-grid-row-1 col-2">TOTAL<span>TIME</span></p>
+        <p class="report-grid-row-1 col-3">TIMES<span>PLAYED</span></p>
+        <div class="row-border-1"></div>
+        <% @top_artists.each do |artist| %>
+          <div class="report-grid-row-2 col-1" id="report-links-unique-artists">
+            <li><p><%= link_to artist[0], external_url(find_artist_by_name(artist[0])), target: :_blank %></p></li>
+          </div>
+          <div class="report-grid-row-2 col-2">
+            <p><%= format_time(artist[1]) %></p>
+          </div>
+          <div class="report-grid-row-2 col-3">
+            <p><%= artist[2] %>x</p>
+          </div>
+          <div class="row-border-2"></div>
+        <% end %>
+      </ol>
+    </section>
+    <section class="report-sub-container", id="report-unique-albums">
+      <h2><%= @total_num_uniq_albums %> UNIQUE ALBUMS</h2>
+      <ol class="report-grid">
+        <p class="report-grid-row-1 col-1">ALBUM</p>  
+        <p class="report-grid-row-1 col-2">TOTAL<span>TIME</span></p>
+        <p class="report-grid-row-1 col-3">TIMES<span>PLAYED</span></p>
+        <div class="row-border-1"></div>
+        <% @top_albums.each do |album| %>
+          <div class="report-grid-row-2 col-1" id="report-links-unique-albums">
+            <li><p><%= link_to album[0], external_url(find_album_by_title(album[0])), target: :_blank %>
+            <% list = find_album_by_title(album[0]).artists.uniq { |a| a.name } %>
+            (<%= list_external_urls(list) %>)</p></li>
+          </div>
+          <div class="report-grid-row-2 col-2">
+            <p><%= format_time(album[1]) %></p>
+          </div>
+          <div class="report-grid-row-2 col-3">
+            <p><%= album[2] %>x</p>
+          </div>
+          <div class="row-border-2"></div>
+        <% end %>
+      </ol>
+    </section>
+    <section class="report-sub-container", id="report-unique-genres">
+      <h2><%= @total_num_uniq_genres %> UNIQUE GENRES</h2>
+      <ol class="report-grid">
+        <p class="report-grid-row-1 col-1">GENRE</p>  
+        <p class="report-grid-row-1 col-2">TOTAL<span>TIME</span></p>
+        <p class="report-grid-row-1 col-3">TIMES<span>PLAYED</span></p>
+        <div class="row-border-1"></div>
+        <% @top_genres.each do |genre| %>
+          <div class="report-grid-row-2 col-1">
+            <li><p><%= genre[0].capitalize %></p></li>
+          </div>
+          <div class="report-grid-row-2 col-2">
+            <p><%= format_time(genre[1]) %></p>
+          </div>
+          <div class="report-grid-row-2 col-3">
+            <p><%= genre[2] %>x</p>
+          </div>
+          <div class="row-border-2"></div>
+        <% end %>
+      </ol>
+    </section>
+  </main>
+</div>

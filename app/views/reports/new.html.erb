@@ -1,15 +1,21 @@
-<h2>Upload your Spotify listening history</h2>
-
-<%= render 'header_index' %>
-<%= render 'report_errors' %>
-
-<%= form_for @report, url: user_reports_path(current_user) do |f| %>
-
-    <%= render partial: 'form', locals: { f: f } %>
-
-    <%= f.file_field :attachment %><br><br>
-    <%#= f.hidden_field :attachment_cache %>
-    <%= f.submit %>
-<% end %>
-
-<%= link_to 'Cancel', user_reports_path(current_user) %>
+<div class="welcome-image">
+  <main class="setup-wrapper" id="setup-wrapper-new">
+    <%= render 'header_index' %>
+    <header class="setup-title">
+        <h2>Upload your Spotify<br>streaming history</h2>
+        <h4>(e.g., StreamingHistory0.json)</h4>
+        <hr>
+    </header>
+    <%= render 'report_errors' %>
+    <section class="setup-report-container">
+        <%= form_for @report, url: user_reports_path(current_user) do |f| %>
+            <%= render partial: 'form', locals: { f: f } %>
+            <%= f.file_field :attachment %>
+            <%#= f.hidden_field :attachment_cache %>
+            <hr>
+            <%= f.submit "CREATE REPORT" %>
+        <% end %>
+        <%= link_to 'CANCEL', user_reports_path(current_user), class: "txt-cancel" %>
+    </section>
+    </main>
+</div>

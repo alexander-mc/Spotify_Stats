@@ -56,7 +56,7 @@ class ReportsController < ApplicationController
 
         # GENRES
         @total_num_uniq_genres = report.genres.uniq{|g| g.id}.count
-        @top_genres = report.genres.order_by_count(limit: 10)
+        @top_genres = report.genres.order_by_count(limit: 100)
         # @top_genres = report.genres.order_by_ms_played(limit: 10)
     end
 

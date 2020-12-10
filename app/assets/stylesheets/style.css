@@ -88,7 +88,7 @@ body, html {
     top: 2.8em;
 }
 
-.btn-sign-up-app, .btn-log-in-app, .btn-log-in-spotify, .btn-registration-submit, .btn-registration-alt {
+.btn-sign-up-app, .btn-log-in-app, .btn-log-in-spotify, .btn-registration-submit, .btn-registration-alt, .setup-report-container input[type="submit"] {
     display: inline-block;
     margin: 5px auto;
     width: 220px;
@@ -109,7 +109,7 @@ body, html {
     letter-spacing: 2px;
 }
 
-.btn-sign-up-app:active, .btn-log-in-app:active, .btn-log-in-spotify:active, .btn-registration-submit:active, .btn-registration-alt:active  {
+.btn-sign-up-app:active, .btn-log-in-app:active, .btn-log-in-spotify:active, .btn-registration-submit:active, .btn-registration-alt:active, .setup-report-container input[type="submit"]:active  {
     transform: scale(.98);
 }
 
@@ -151,6 +151,16 @@ body, html {
     top: -3px;
 }
 
+.txt-created-by {
+    position: relative;
+    font-family: 'website-title', sans-serif;
+    font-size: 14.5px;
+    font-weight: bolder;
+    letter-spacing: 3px;
+    color: white;
+    top: 67px;
+}
+
 .registration-content {
     border-radius: 20px;
     border: 1px solid rgba(233, 233, 233, 0.795);
@@ -186,7 +196,7 @@ form input[type="text"]:focus, form input[type="password"]:focus{
     background: hsl(189, 41%, 97%);
 }
 
-.btn-registration-submit, .btn-registration-alt {
+.btn-registration-submit, .btn-registration-alt, .setup-report-container input[type="submit"] {
     display: block;
     margin: 0 auto;
     font-size: 14px;
@@ -202,7 +212,7 @@ form input[type="text"]:focus, form input[type="password"]:focus{
     border: none;
 }
 
-.btn-registration-submit:hover {
+.btn-registration-submit:hover, .setup-report-container input[type="submit"]:hover {
     background-color: rgb(56, 151, 128);
 }
 
@@ -245,16 +255,6 @@ form input[type="text"]:focus, form input[type="password"]:focus{
     text-align: left;
 }
 
-.background-color {
-    background: linear-gradient(to right, #141414, #303335);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    display: flow-root;
-    height: 100%;
-}
-
 .setup-wrapper {
     margin: 0 auto;
     border-radius: 20px;
@@ -271,14 +271,14 @@ form input[type="text"]:focus, form input[type="password"]:focus{
     transform: translate(-50%, -50%);
 }
 
-.header-setup {
+.setup-header {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
 }
 
-.header-setup h3, .report-name, .add-report {
+.setup-header h3, .report-name, .add-report {
     /* display: inline-block;
     float: left; */
     font-family: "website-title", sans-serif;
@@ -426,6 +426,497 @@ form input[type="text"]:focus, form input[type="password"]:focus{
 
 .add-report:hover > img {
     filter: brightness(.94);
+}
+
+.setup-title h2, .setup-title h4 {
+    text-align: center;
+    font-family: "website-title", sans-serif;
+    font-size: 28px;
+    color: rgb(250, 250, 250);
+    letter-spacing: 0px;
+    margin: 20px 0px 10px 0px;
+}
+
+.setup-title h4 {
+    font-size: 16px;
+    margin: 10px 0px 15px 0px;
+}
+
+.setup-wrapper .msg-box {
+    margin: 0 auto;
+    margin-bottom: 17px;
+    width: 277px;
+}
+
+section.msg-box {
+    text-align: center;
+}
+
+.setup-report-container input[type="text"] {
+    text-align: center;
+    width: 246px;
+}
+
+.setup-report-container input[type="file"] {
+    display: block;
+    color: white;
+    margin: 15px 0px 17px 107px;
+    width: 263px;
+    cursor: pointer;
+    
+}
+
+.setup-report-container input[type="file"]:hover {
+    border: .5px solid white;
+}
+
+.setup-report-container input[type="file"]:active {
+    filter: brightness(.9);
+}
+
+.setup-report-container input[type="file"]:focus {
+    outline: none;
+}
+
+.setup-report-container input[type="submit"] {
+    width: 190ox;
+    height: 32px;
+    border-radius: 52px;
+
+    margin-top: 15px;
+}
+
+.txt-cancel {
+    margin: 0 auto;
+    margin-top: 12px;
+    margin-bottom: -5px;
+    font-family: 'website-content', sans-serif;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    font-size: 14px;
+    display: block;
+    width: 72px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: all 0.4s;
+}
+
+.txt-cancel:hover {
+    color: rgba(230, 230, 230, 0.877);
+}
+
+.txt-cancel:active {
+    transform: scale(.98);
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    width: 402px;
+    margin-bottom: 16px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(218, 216, 216, 0.87), rgba(0, 0, 0, 0));
+}
+
+.setup-report-container p {
+    display: block;
+    margin: -5px 0px 12px 0px;
+    text-align: center;
+    font-size: 14.5px;
+    font-family: "website-content", sans-serif;
+    color: rgb(250, 250, 250);
+}
+
+.report-background {
+    background: linear-gradient(to right, #141414, #303335);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    display: flex;
+
+    color: #fff;
+}
+
+.report-wrapper {
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 2px solid rgba(92, 92, 92, 0.822);
+    /* background: rgba(3, 17, 34, 0.808); */
+
+    /* width: 800px; */
+    width: 85vw;
+    padding: 25px 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    /* position: absolute;
+    top: 37%;
+    left: 50%;
+    transform: translate(-50%, -50%);    */
+}
+
+.report-nav {
+    display: grid;
+    grid-template-columns: auto 125px 113px;
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+.report-nav p {
+    margin: 0 0 0 0;
+}
+
+.txt-username p {
+    font-family: "website-title", sans-serif;
+    color: rgba(255, 255, 255);
+    /* color: hsla(182, 100%, 57%, 0.74); */
+    font-size: 17px;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
+
+.txt-dashboard {
+    transition: all 0.4s;
+}
+
+.txt-dashboard a {
+    text-decoration: none;
+
+    font-family: "website-title", sans-serif;
+    color: rgba(207, 207, 207, 0.6);
+    font-size: 17px;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
+
+.txt-dashboard a:hover {
+    /* color: rgb(255, 255, 255); */
+    /* color: hsla(118, 100%, 58%, 0.74); */
+
+    color: hsl(196, 270%, 64%);
+    /* color: hsla(182, 100%, 57%, 0.822); */
+}
+
+.txt-dashboard:active {
+    transform: scale(.97);
+}
+
+.report-nav form, .txt-dashboard  {
+    justify-self: end;
+}
+
+.txt-first-name {
+    margin: auto;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.txt-first-name h1 {
+    margin: 25px 0 9px 0;
+
+
+    font-family: "report-heading", sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 70px;
+    letter-spacing: 0.5px;
+    /* font-weight: bolder; */
+
+    /* keepcalm-medium
+    font-size: 46px;
+    letter-spacing: 5.5px; */
+
+    /* background: linear-gradient(to bottom, hsla(182, 100%, 65%, 0.849),hsla(182, 100%, 60%, 0.774), rgba(71, 218, 255, 0.11));  */
+    /* background-color: rgb(255, 255, 255); */
+    /* background-color: hsl(192, 67%, 56%); */
+
+    background-color: hsl(196, 270%, 64%);
+    /* background-color: hsl(182, 100%, 57%, 0.822); */
+    /* background-size: 100%;
+    background-repeat: repeat; */
+    /* Shows the gradient as a text color */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+
+}
+
+.report-dates {
+    
+    /* border-left: 8px solid rgba(207, 207, 207, 0.6);
+    border-right: 8px solid rgba(207, 207, 207, 0.6); */
+
+    /* border-left: 8px solid rgb(255, 255, 255);
+    border-right: 8px solid rgba(255, 255, 255); */
+
+    /* margin: 0 auto;
+    width: 74%;
+    border-radius: 46px;
+    margin-top: 6px; */
+
+    color: rgba(207, 207, 207, 0.6);
+    /* color: rgb(255, 255, 255); */
+
+    margin-top: 10px;
+    margin-bottom: 9px;
+}
+
+.report-dates h4 {
+    margin: 0px auto;
+    font-family: "website-content", sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.report-dates h2 {
+    margin: 0px auto;
+    font-family: "report-heading", sans-serif;
+    font-size: 37px;
+    letter-spacing: -.5px;
+    text-align: center;
+    margin-top: -9px;
+    margin-bottom: 0px;
+    
+    color: rgba(214, 242, 146, 0.897);
+    /* color: rgba(208, 255, 77, 0.897); */
+
+    /* background: linear-gradient(90deg, hsl(192, 67%, 56%),hsla(61, 100%, 66%, 0.87));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent; */
+}
+
+.report-wrapper hr {
+    height: 1px;
+    width: 488px;
+    margin: 0 auto;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(190, 190, 190), rgba(0, 0, 0, 0));
+}
+
+.report-dates .txt-between {
+    /* text-align: left; */
+}
+
+.report-dates .txt-you-listened-to {
+    /* text-align: right; */
+}
+
+.report-total-songs {
+    margin: 0 auto;
+    text-align: center;
+
+    background: linear-gradient(180deg, hsl(202, 260%, 57%),hsl(313deg 396% 75% / 64%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.report-total-songs h2 {
+    font-family: "report-heading", sans-serif;
+    font-size: 70px;
+    letter-spacing: -.5px;
+    margin: 0 auto;
+    margin-top: 0px;
+}
+
+.report-total-songs h4 {
+    margin: auto;
+    margin-bottom: 31px;
+
+    /* font-family: "report-heading", sans-serif;
+    font-size: 29px;
+    letter-spacing: -0.5px;
+    margin-top: -12px; */
+
+    font-family: "website-content", sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.5px;
+    font-weight: bolder;
+    margin-top: -8px;
+    background: grey;
+
+
+    /* background: rgb(154, 56, 183); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.report-sub-container {
+    margin: auto;
+    margin-top: 31px;
+    border-radius: 50px;
+    /* border: 4px solid rgba(95, 250, 211, 0.767); */
+    /* border: 4px solid rgba(57, 509, 171, 70); */
+    width: 81vw;
+    padding: 7px 5px 23px 5px;
+}
+
+.report-sub-container h2 {
+    font-family: "report-heading", sans-serif;
+    font-size: 55px;
+    letter-spacing: -.5px;
+    margin: 0 auto;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#report-unique-songs {
+    /* border: 4px solid rgba(155, 209, 253, 0.904); */
+    border: 4px solid rgba(119, 252, 197, 0.568);
+}
+
+#report-unique-songs h2 {
+    background: linear-gradient(rgba(119, 253, 197, 0.932), rgba(172, 197, 186, 0.932));
+    /* background: linear-gradient(rgba(40, 255, 148), rgba(167, 167, 167, 0.767)); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.report-grid {
+    display: grid;
+    grid-template-columns: auto 90px 90px;
+    grid-row-gap: 4px;
+    align-items: center;
+    margin: 0 auto;
+    font-family: "website-content", sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    width: 90%;
+}
+
+.row-border-1{
+    border-top: 0.5px solid rgba(92, 92, 92, 0.822);
+    grid-column: 1 / 4; /* this code makes the row stretch to entire width of the container */
+}
+
+.row-border-2 {
+    border-top: 0.5px solid rgba(92, 92, 92, 0.822);
+    grid-column: 1 / 4; /* this code makes the row stretch to entire width of the container */
+}
+
+.row-border-2:last-child {
+    border: 0px;
+}
+
+.report-grid span {
+    display: block;
+    margin-top: -2px;
+}
+
+.report-grid-row-1 {
+    align-self: end;
+    margin: 0 0 -3px 0;
+}
+
+.report-grid-row-2 p {
+    margin: 0 0 0 0;
+}
+
+.report-grid-row-1.col-2, .report-grid-row-1.col-3 {
+    text-align: center;
+    justify-self: center;
+}
+
+#report-links-unique-songs {
+    display: grid;
+    grid-template-columns: 50px auto;
+    align-items: center;
+    /* margin: 0 auto; */
+}
+
+#report-links-unique-songs img:hover {
+    border-color: rgba(119, 253, 197, 0.932);
+}
+
+#report-links-unique-songs img:active {
+    transform: scale(.975);
+}
+
+#report-links-unique-songs a:hover {
+    color: rgba(119, 253, 197, 0.932);
+}
+
+.report-grid-row-2 img {
+    width: 35px;
+    border: .25px solid white;
+    vertical-align: middle;
+    transition: all 0.4s;
+}
+
+.report-grid-row-2 img:hover {
+    cursor: pointer;
+}
+
+.report-grid-row-2.col-1 a {
+    text-decoration: none;
+    color: white;
+}
+
+.report-grid-row-2.col-2, .report-grid-row-2.col-3 {
+    text-align: center;
+}
+
+
+#report-unique-artists {
+    /* border: 4px solid rgba(155, 209, 253, 0.904); */
+    border: 4px solid rgba(136, 31, 255, 0.74);
+}
+
+#report-unique-artists h2 {
+    background: linear-gradient(rgba(237, 39, 255, 0.932), rgba(209, 35, 252, 0.479));
+    /* background: linear-gradient(rgba(255, 39, 244, 0.932), rgba(136, 31, 255, 0.74)); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+#report-links-unique-artists a:hover {
+    color: rgba(237, 39, 255, 0.932);
+}
+
+#report-unique-albums {
+    /* border: 4px solid rgba(155, 209, 253, 0.904); */
+    border: 4px solid rgba(30, 117, 230, 0.932);
+}
+
+#report-unique-albums h2 {
+    background: linear-gradient(rgba(30, 117, 230, 0.932), rgba(116, 198, 230, 0.685));
+    /* background: linear-gradient(rgba(255, 39, 244, 0.932), rgba(136, 31, 255, 0.74)); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+#report-links-unique-albums a:hover {
+    color: rgb(101, 204, 252);
+}
+
+#report-unique-genres {
+    /* border: 4px solid rgba(155, 209, 253, 0.904); */
+    border: 4px solid rgba(224, 211, 28, 0.767);
+}
+
+#report-unique-genres h2 {
+    background: linear-gradient(rgb(240, 218, 25), rgba(214, 196, 29, 0.507));
+    /* background: linear-gradient(rgba(255, 39, 244, 0.932), rgba(136, 31, 255, 0.74)); */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
 }
 
 /* Breakpoints */
