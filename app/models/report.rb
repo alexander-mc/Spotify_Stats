@@ -31,9 +31,9 @@ class Report < ApplicationRecord
             
             track_name = hash["trackName"]
             artist_name = hash["artistName"]
-
-            query_tracks = RSpotify::Track.search(track_name)
             
+            # NOTE: Below request to Spotify may need to be re-run several times for it to be successful
+            query_tracks = RSpotify::Track.search(track_name)
             query_track = query_tracks.select do |t|
               t.artists.any?{|a| a.name == artist_name}
             end
@@ -65,7 +65,7 @@ class Report < ApplicationRecord
             song = Song.find_by(spotify_id: track.id)
           
             if !song.present?
-          
+              
               artist_ids = []
               track.artists.each do |a|
                 artist = Artist.find_or_create_by(spotify_id: a.id)
