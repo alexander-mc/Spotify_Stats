@@ -33,10 +33,9 @@ class ReportsController < ApplicationController
         # Missing songs =  2.5min * 1000 ms/min (in 2019, the avg song length is ~ 3min... 2.5min accounts for songs only partially listened to + continued decline in song length)
         time = report.song_reports.total_time + (report.missing_songs * 2.5 * 60 * 1000)
         hours = time / (1000 * 60 * 60) #(ms * sec/min * min/hr)
-        minutes = (hours - hours.round(-1)) * 60
-
+        minutes = (hours - hours.to_i) * 60
         @total_num_songs = report.songs.count + report.missing_songs
-        @total_time = "#{hours.round(-1)} Hours, #{minutes.round} Minutes"
+        @total_time = "#{hours.to_i} Hours, #{minutes.round} Minutes"
         # @total_time = Time.at(time/1000).utc.strftime("%d Days, %-H Hours, %-M Minutes")
 
         # SONGS
@@ -68,7 +67,16 @@ class ReportsController < ApplicationController
         @report = Report.find_by(id: params[:id])
 
         if @report.update(report_params)
-            redirect_to user_reports_path(current_user)
+
+            if report_params[:attachment].present?
+                @report.destroy_song_reports
+                @report.missing_songs = 0
+                @report.save
+
+                @report.load_streaming_history(session)
+            end
+            
+            redirect_to user_report_path(current_user, @report)
         else
             flash[:report_errors] = @report.errors.full_messages
             @original_report_name = Report.find(params[:id]).attachment.identifier

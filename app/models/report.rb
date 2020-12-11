@@ -77,7 +77,7 @@ class Report < ApplicationRecord
               track.artists.each do |a|
                 a.genres.each do |g|
                   genre = Genre.find_or_create_by(name: g)
-                  genre_ids << genre.id
+                  genre_ids << genre.id unless genre_ids.include?(genre.id)
                 end
               end
               
@@ -93,8 +93,6 @@ class Report < ApplicationRecord
         end
           
     end
-
-    private
 
     def destroy_song_reports
       song_reports.in_batches(of: 1000).delete_all
