@@ -25,7 +25,7 @@ Scroll down to the bottom of the page, click on the 'Request' button to request 
 
 Wait a couple days for an email from Spotify with a link to download your files. You will then have 14 days to download the file.
 
-**Note that Spotify mentions that it could take up to 30 days to process your request, however I've always recieved my data 2-3 business days after submitting my requeest (and I've requested data quite a bit).**
+*Note that Spotify mentions that it could take up to 30 days to process your request, however I've always recieved my data 2-3 business days after submitting my requeest (and I've requested data quite a bit).*
 
 2. Upload the streaming history JSON file. Once you've downladed your data from Spotify, look for the file with 'StreamingHistory' in the title.
 
