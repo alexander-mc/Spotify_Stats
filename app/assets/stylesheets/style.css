@@ -48,6 +48,10 @@ body, html {
     /* border: 1px solid green; */
 }
 
+.welcome-content {
+    top: 47.75%;
+}
+
 .website-title h1, .registration-title h1 {
     font-family: 'website-title', sans-serif;
     font-weight: normal;

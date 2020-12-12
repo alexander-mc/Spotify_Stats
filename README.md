@@ -1,24 +1,14 @@
-# README
+# Spotify Stats
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+## Preview
 
-* System dependencies
+## Useage
 
-* Configuration
+## Configuration
 
-* Database creation
 
-* Database initialization
+## Contributing
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Bug reports and pull requests are welcome on GitHub at https://github.com/alexander-mc/album-art. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
