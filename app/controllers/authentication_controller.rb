@@ -20,7 +20,7 @@ class AuthenticationController < ApplicationController
     end
 
     def failure
-        current_user.destroy if User.signing_in?(current_user)
+        current_user.destroy if User.signing_up?(current_user)
         session.delete(:user_id)
         redirect_to root_path
     end
