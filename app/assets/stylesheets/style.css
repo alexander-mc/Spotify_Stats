@@ -324,7 +324,9 @@ form input[type="text"]:focus, form input[type="password"]:focus{
 
 #index-msg-box {
     padding: 6px 0px;
-    margin: 20px 0px 0px 0px;
+    margin: 0px auto;
+    margin-top: 20px;
+    margin-bottom: -5px;
     text-align: center;
     font-size: 14.5px;
 }
