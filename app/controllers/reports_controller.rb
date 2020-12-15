@@ -8,9 +8,9 @@ class ReportsController < ApplicationController
     end
 
     def create
-        @report = Report.create(report_params)
+        @report = Report.new(report_params)
 
-        if @report.valid?
+        if @report.save
             @report.load_streaming_history(session)
             redirect_to user_report_path(current_user, @report)
         else
@@ -27,8 +27,8 @@ class ReportsController < ApplicationController
         report = Report.find_by(id: params[:id])
 
         @start_date = report.song_reports.start_date
-        @end_date = report.song_reports.end_date
-        
+        @end_date = report.song_reports.end_date  
+
         # TOTAL TIME (including est for missing songs)
         # Missing songs =  2.5min * 1000 ms/min (in 2019, the avg song length is ~ 3min... 2.5min accounts for songs only partially listened to + continued decline in song length)
         time = report.song_reports.total_time + (report.missing_songs * 2.5 * 60 * 1000)
