@@ -5,7 +5,7 @@ Why wait until the end of the year to view your music history on Spotify? Reques
 ## Links
 
 + [Spotify Stats](https://spotifystatsapp.herokuapp.com/) - Play with the app! Note that this app works best on Chrome.
-+ [Live Demo](https://youtu.be/X0c1Zpq_0Es) - Watch me demo the app
++ [Demo](https://youtu.be/X0c1Zpq_0Es) - Watch me demo the app
 
 ## Preview
 
