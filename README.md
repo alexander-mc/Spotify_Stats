@@ -1,6 +1,6 @@
 # Spotify Stats
 
-Why wait until the end of the year to view your music history on Spotify? Request your streaming history data over the past year from your Spotify account and then use [Spotify Stats](https://spotifystatsapp.herokuapp.com/) to interpret the data. This program displays data on your listening behavior in one clean view and stores the information so that you can review it later.
+Why wait until the end of the year to view your music history on Spotify? Request your streaming history data over the past year from your Spotify account and then use Spotify Stats to interpret the data. This program displays data on your listening behavior in one clean view and stores the information so that you can review it later.
 
 ## Links
 
