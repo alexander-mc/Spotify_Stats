@@ -1,6 +1,6 @@
 # Spotify Stats
 
-Why wait until the end of the year to view your music history on Spotify? Request your streaming history over the past year from your Spotify account and then use Spotify Stats to analyze the JSON file. This app will display data on your listening behavior and allow you to store the information so that you can review it later.
+Why wait until the end of the year to view your music history on Spotify? Request your streaming history over the past year from your Spotify account and then use Spotify Stats to analyze the JSON file. This app will create a report on your listening behavior and allow you to store the information so that you can review it later.
 
 ## Links
 
